@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine?</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+  h1 {
+    color: #b30059;
+    z-index: 2;
+  }
+  button {
+    padding: 16px 32px;
+    font-size: 20px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    margin: 20px;
+    z-index: 2;
+  }
+  #yes { background: #ff4d88; color: white; }
+  #no { background: #ddd; position: absolute; touch-action: none; }
+  /* Floating hearts */
+  .heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    opacity: 0.7;
+  }
+  @keyframes float {
+    from { transform: translateY(100vh); opacity: 1; }
+    to   { transform: translateY(-10vh); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+<div>
+  <h1>Jiayi my bby will you be my valentine? 😚</h1>
+  <button id="yes">Yes</button>
+  <button id="no">No</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+
+// Function to randomly move No button
+function moveNoButton() {
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  noBtn.style.left = `${x}px`;
+  noBtn.style.top = `${y}px`;
+}
+
+// Desktop chaos
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("mousemove", moveNoButton);
+noBtn.addEventListener("click", moveNoButton);
+
+// Mobile chaos
+noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveNoButton(); });
+noBtn.addEventListener("touchmove", (e) => { e.preventDefault(); moveNoButton(); });
+
+document.getElementById("yes").onclick = () => {
+  window.location.href = "yes.html";
+};
+
+// Floating hearts
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 24 + 14 + "px";
+  heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 7000);
+}, 300);
+</script>
+</body>
+</html>
