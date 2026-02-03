@@ -10,15 +10,20 @@
     font-family: Arial, sans-serif;
     background: pink;
     display: flex;
+    flex-direction: column; /* stack GIF above question/buttons */
     justify-content: center;
     align-items: center;
     height: 100vh;
     text-align: center;
   }
+
   h1 {
     color: #b30059;
     z-index: 2;
+    margin: 20px 0 0 0;
+    font-size: calc(20px + 2vw); /* scales nicely on mobile */
   }
+
   button {
     padding: 20px 40px;
     font-size: 40px;
@@ -28,8 +33,18 @@
     margin: 15px;
     z-index: 2;
   }
-  #yes { background: #ff4d88; color: white; }
-  #no { background: #ddd; position: absolute; touch-action: none; }
+
+  #yes { 
+    background: #ff4d88; 
+    color: white; 
+  }
+
+  #no { 
+    background: #ddd; 
+    position: absolute; 
+    touch-action: none; 
+  }
+
   /* Floating hearts */
   .heart {
     position: absolute;
@@ -37,20 +52,36 @@
     animation: float 6s linear infinite;
     opacity: 0.7;
   }
+
   @keyframes float {
     from { transform: translateY(100vh); opacity: 1; }
     to   { transform: translateY(-10vh); opacity: 0; }
+  }
+
+  /* GIF container spacing */
+  .gif-container {
+    margin-bottom: 30px; /* space between GIF and question/buttons */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .gif-container img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 15px;
   }
 </style>
 </head>
 <body>
 
-<div style="display:flex; justify-content:center; margin-top:20px;">
+<!-- GIF at the top -->
+<div class="gif-container">
   <img src="https://media.giphy.com/media/puUeBoInZy16GV2VkN/giphy.gif" 
-       alt="Valentine GIF" 
-       style="max-width:90%; height:auto; border-radius:15px;">
+       alt="Valentine GIF">
 </div>
 
+<!-- Question and buttons -->
 <div>
   <h1>Jiayi my bby will you be my valentine? 😚</h1>
   <button id="yes">Yes</button>
@@ -77,6 +108,7 @@ noBtn.addEventListener("click", moveNoButton);
 noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveNoButton(); });
 noBtn.addEventListener("touchmove", (e) => { e.preventDefault(); moveNoButton(); });
 
+// Yes button redirects to yes.html
 document.getElementById("yes").onclick = () => {
   window.location.href = "yes.html";
 };
@@ -93,5 +125,7 @@ setInterval(() => {
   setTimeout(() => heart.remove(), 7000);
 }, 300);
 </script>
+
 </body>
 </html>
+
